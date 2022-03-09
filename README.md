@@ -5,12 +5,29 @@ This is an assignment to test my knowledge on React, Typescript, Material UI, Je
 ## To Start
 
 ```bash
-git clone //TODO: CREATE REPO<repo>
+git clone https://github.com/DeveloperDevon/koneksa
+cd koneksa
 npm install
 npm start
 ```
 
+## To Run Tests
+```bash
+npm run test
+```
+
 ## Included Libraries
 - Styling Library: [Material UI](https://mui.com/)
-- Form Validation: TODO: Use Yup for form validation
-- Component Testing Framework: [Jest](https://jestjs.io/) & [React Testing Library](https://testing-library.com/)
+- Component Testing: [Jest](https://jestjs.io/) & [React Testing Library](https://testing-library.com/)
+- Unit Testing: [Jest](https://jestjs.io/)
+
+## State Management
+- useReducer Hook
+
+## API For Fetching Timezones
+- [World Time API](http://worldtimeapi.org/api/timezone)
+
+## Would Have Liked To Do...
+- Form Validation using Formik and Yup
+- Data persistance using an AWS lambda function with DynamoDB
+- e2e testing with cypress

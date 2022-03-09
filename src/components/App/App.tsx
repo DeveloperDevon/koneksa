@@ -7,7 +7,7 @@ import { FormState } from '../../lib/types';
 export const App = () => {
   const handleSubmit = (state: FormState) => {
      const requestBody = genRequestBody(state);
-     alert(JSON.stringify(requestBody));
+     alert(JSON.stringify(requestBody, null, 3));
   };
   
   return (
