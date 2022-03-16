@@ -1,6 +1,5 @@
 .formContainer {
-  max-width: 800px;
-  padding: 20px;
-  display: 'flex';
-
+   max-width: 800px;
+   padding: 20px;
+   display: 'flex';
 }

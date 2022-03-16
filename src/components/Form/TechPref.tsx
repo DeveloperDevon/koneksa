@@ -1,29 +1,50 @@
-import Radio from "@mui/material/Radio"
-import RadioGroup from "@mui/material/RadioGroup"
-import FormControlLabel from "@mui/material/FormControlLabel"
-import FormLabel from "@mui/material/FormLabel"
-import { TECH_PREFS } from "../../lib/contants";
+import {
+   Radio,
+   RadioGroup,
+   FormControlLabel,
+   FormLabel,
+   FormHelperText,
+} from '@mui/material'
+import { TECH_PREFS } from '../../lib/contants'
 
 interface TechPrefProps {
-   value: string | undefined
+   name: string
    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+   error: boolean | undefined
+   helperText: string | false | undefined
 }
 
-export const TechPref: React.FC<TechPrefProps> = ({ value, onChange }) => {
-
+export const TechPref: React.FC<TechPrefProps> = ({
+   name,
+   onChange,
+   error,
+   helperText,
+}) => {
    return (
       <>
-         <FormLabel id="tech-pref-label">Tech Preference</FormLabel>
-         <RadioGroup row aria-labelledby="tech-pref-label" name="tech-pref" onChange={onChange}>
+         <FormLabel id='tech-pref-label'>Tech Preference</FormLabel>
+         <RadioGroup
+            row
+            aria-labelledby='tech-pref-label'
+            name='tech-pref'
+            onChange={onChange}
+         >
             {TECH_PREFS.map((pref, index) => (
                <FormControlLabel
                   key={index}
                   label={pref}
+                  name={name}
                   value={pref}
+                  data-test={pref}
                   control={<Radio />}
                />
             ))}
          </RadioGroup>
+         {error && (
+            <FormHelperText style={{ marginLeft: 15, color: '#d32f2f' }}>
+               {helperText}
+            </FormHelperText>
+         )}
       </>
-   );
-};
+   )
+}

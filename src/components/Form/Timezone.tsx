@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react'
-import InputLabel from "@mui/material/InputLabel";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Grid from "@mui/material/Grid"
-import { TIMEZONE_BASE_URL, TIMEZONE_AREAS } from '../../lib/contants';
-import { Action } from '../../lib/types';
+import InputLabel from '@mui/material/InputLabel'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+import Grid from '@mui/material/Grid'
+import { TIMEZONE_BASE_URL, TIMEZONE_AREAS } from '../../lib/contants'
 
 interface TimezoneProps {
+   name: string
    value: string | undefined
+   setFieldValue: (field: string, value: string) => void
    onChange: (event: SelectChangeEvent) => void
-   dispatch: (value: Action) => void
 }
 
-export const Timezone: React.FC<TimezoneProps> = ({ value, onChange, dispatch }) => {
+export const Timezone: React.FC<TimezoneProps> = ({
+   name,
+   value,
+   setFieldValue,
+   onChange,
+}) => {
    const [fetchingData, setFetchingData] = useState<boolean>(false)
    const [timezones, setTimezones] = useState<string[]>([])
    const [area, setArea] = useState<string>('America')
@@ -20,9 +25,11 @@ export const Timezone: React.FC<TimezoneProps> = ({ value, onChange, dispatch })
    const fetchTimezones = async (tzArea: string) => {
       setFetchingData(true)
       try {
-         const response = await fetch(`${TIMEZONE_BASE_URL}/${tzArea}`).then(res => res.json())
+         const response = await fetch(`${TIMEZONE_BASE_URL}/${tzArea}`).then(
+            (res) => res.json()
+         )
          setTimezones(response)
-         dispatch({ type: 'SET_TIMEZONE', payload: response[0] })
+         setFieldValue(name, response[0])
          setFetchingData(false)
          return response
       } catch (err) {
@@ -37,15 +44,15 @@ export const Timezone: React.FC<TimezoneProps> = ({ value, onChange, dispatch })
    }, [area])
 
    return (
-      <Grid container direction="row" spacing={2}>
-         <Grid item xs={12} md={6}>
-            <InputLabel id="area-label">Area</InputLabel>
+      <Grid container direction='row' spacing={2}>
+         <Grid item xs={12} sm={6}>
+            <InputLabel id='area-label'>Area</InputLabel>
             <Select
-               labelId="area-label"
-               id="area"
-               value={fetchingData ? "" : area}
+               labelId='area-label'
+               id='area'
+               value={fetchingData ? '' : area}
                onChange={(e) => setArea(e.target.value)}
-               sx={{ width: "100%" }}
+               sx={{ width: '100%' }}
                disabled={fetchingData}
             >
                {!fetchingData &&
@@ -56,16 +63,17 @@ export const Timezone: React.FC<TimezoneProps> = ({ value, onChange, dispatch })
                   ))}
             </Select>
          </Grid>
-         <Grid item xs={12} md={6}>
-            <InputLabel id="timezone-label">
-               {fetchingData ? "Fetching Timezones" : "Timezone"}
+         <Grid item xs={12} sm={6}>
+            <InputLabel id='timezone-label'>
+               {fetchingData ? 'Fetching Timezones' : 'Timezone'}
             </InputLabel>
             <Select
-               labelId="timezone-label"
-               id="timezone"
-               value={fetchingData ? "" : value}
+               labelId='timezone-label'
+               id='timezone'
+               value={fetchingData ? '' : value}
+               name={name}
                onChange={onChange}
-               sx={{ width: "100%" }}
+               fullWidth
                disabled={fetchingData}
             >
                {timezones.map((timezone, index) => (
@@ -76,5 +84,5 @@ export const Timezone: React.FC<TimezoneProps> = ({ value, onChange, dispatch })
             </Select>
          </Grid>
       </Grid>
-   );
-};
+   )
+}

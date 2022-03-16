@@ -1,23 +1,22 @@
 export type Topping =
-   | "Cheese"
-   | "Pepperonni"
-   | "Sausage"
-   | "Ham"
-   | "Pineapple"
-   | "Mushrooms"
-   | "Olives"
-   | "Artichokes"
+   | 'Cheese'
+   | 'Pepperonni'
+   | 'Sausage'
+   | 'Ham'
+   | 'Pineapple'
+   | 'Mushrooms'
+   | 'Olives'
+   | 'Artichokes'
 
-export type ActionType =
-   | "SET_NAME"
-   | "SET_PASSWORD"
-   | "SET_BIRTHDAY"
-   | "SET_TIMEZONE"
-   | "SET_TECH_PREF"
-   | "SET_TOPPINGS"
-   | "RESET_FORM"
+export type TechPrefType = 'front end' | 'back end' | 'both' | undefined
+export type Crust = 'Regular' | 'Thin' | 'Deep Dish'
+export type Sauce = 'Tomato' | 'Garlic Ranch' | 'Pesto' | 'BBQ Sauce'
 
-export type TechPrefType = "front end" | "back end" | "both" | undefined
+export interface PizzaToppings {
+   crust: Crust
+   sauce: Sauce
+   toppings: Topping[]
+}
 
 export interface FormState {
    name: string
@@ -25,12 +24,7 @@ export interface FormState {
    birthday: string | Date | null
    timezone: string | undefined
    techPref: TechPrefType
-   pizzaToppings: Topping[]
-}
-
-export interface Action {
-   type: ActionType;
-   payload: any;
+   pizzaToppings: PizzaToppings
 }
 
 export interface RequestBody {
@@ -39,7 +33,7 @@ export interface RequestBody {
    birthday: string | Date | null
    preferences: {
       techPref: TechPrefType
-      pizzaToppings: Topping[]
+      pizzaToppings: PizzaToppings
       timezone: string | undefined
    }
 }

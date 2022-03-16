@@ -1,12 +1,4 @@
-import { FormState, RequestBody, Topping } from "./types";
-
-export const getUpdatedToppings = (selectedToppings: Topping[], topping: Topping) => {
-   const updatedToppings = selectedToppings.includes(topping) ?
-      selectedToppings.filter((t) => t !== topping) :
-      [ ...selectedToppings, topping ]
-
-   return updatedToppings
-};
+import { FormState, RequestBody } from './types'
 
 export const genRequestBody = (state: FormState): RequestBody => {
    const { name, password, birthday, techPref, timezone, pizzaToppings } = state
@@ -17,7 +9,7 @@ export const genRequestBody = (state: FormState): RequestBody => {
       preferences: {
          techPref,
          timezone: timezone,
-         pizzaToppings
-      }
+         pizzaToppings,
+      },
    }
 }
