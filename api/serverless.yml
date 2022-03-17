@@ -1,0 +1,53 @@
+service: koneska-challenge-api
+app: koneksa-challenge
+frameworkVersion: '3'
+
+provider:
+   name: aws
+   runtime: nodejs14.x
+   region: us-west-1
+
+   iam:
+      role:
+         statements:
+            - Effect: Allow
+              Action:
+                 - 'dynamodb:PutItem'
+                 - 'dynamodb:GetItem'
+                 - 'dynamodb:DeleteItem'
+                 - 'dynamodb:Scan'
+              Resource:
+                 - { 'Fn::GetAtt': ['KoneksaTable', 'Arn'] }
+
+functions:
+  getRecords:
+    handler: lambdas/handlers.getRecords
+    events:
+      - httpApi:
+          path: '/records'
+          method: get
+  createRecord:
+    handler: lambdas/handlers.createRecord
+    events:
+      - httpApi:
+          path: '/record'
+          method: post
+
+plugins:
+   - serverless-plugin-typescript
+
+resources:
+   Resources:
+      KoneksaTable:
+         Type: AWS::DynamoDB::Table
+         Properties:
+            TableName: KoneksaTable
+            ProvisionedThroughput:
+               ReadCapacityUnits: 1
+               WriteCapacityUnits: 1
+            AttributeDefinitions:
+               - AttributeName: id
+                 AttributeType: S
+            KeySchema:
+               - AttributeName: id
+                 KeyType: HASH

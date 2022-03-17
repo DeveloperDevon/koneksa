@@ -1,5 +1,7 @@
 import { Topping } from './types'
 
+// export const baseURL = 'use_to_mock_errors'
+export const baseURL = process.env.REACT_APP_API_GATEWAY_US_WEST
 export const TIMEZONE_AREAS = [
    'Africa',
    'America',

@@ -37,3 +37,7 @@ export interface RequestBody {
       timezone: string | undefined
    }
 }
+
+export interface Record extends RequestBody {
+   id: string
+}

@@ -4,3 +4,9 @@
    align-items: center;
    padding: 15px 0px;
 }
+
+.formContainer {
+   max-width: 800px;
+   padding: 20px;
+   display: 'flex';
+}

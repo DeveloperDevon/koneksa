@@ -1,5 +1,11 @@
-import { Box, Card, Grid, TextField, Typography } from '@mui/material'
+import { useState } from 'react'
+import { Box, Grid, LinearProgress, TextField } from '@mui/material'
 import { initialValues } from './initialValues'
+import { useFormik } from 'formik'
+import { validationSchema } from './validationSchema'
+import { createRecord } from '../../lib/helpers'
+import { FormState } from '../../lib/types'
+import { SnackbarProps } from '../Util'
 import {
    DatePicker,
    Timezone,
@@ -7,26 +13,44 @@ import {
    Toppings,
    ActionButtons,
 } from './index'
-import './Form.css'
-import { useFormik } from 'formik'
-import { validationSchema } from './validationSchema'
 
-export const Form: React.FC = () => {
-   const onSubmit = (values: any) => {
-      alert(JSON.stringify(values, null, 2))
+interface Props {
+   setTabIndex: React.Dispatch<React.SetStateAction<number>>
+   setSnackbar: React.Dispatch<React.SetStateAction<SnackbarProps>>
+}
+
+export const Form: React.FC<Props> = ({ setTabIndex, setSnackbar }) => {
+   const [submissionPending, setSubmissionPending] = useState<boolean>(false)
+
+   const onSubmit = async (values: FormState) => {
+      setSubmissionPending(true)
+      try {
+         await createRecord(values)
+            .then(() => {
+               setTabIndex(1)
+               setSnackbar({
+                  open: true,
+                  message: 'Submission Successful',
+               })
+            })
+            .finally(() => setSubmissionPending(false))
+      } catch (err: any) {
+         setSubmissionPending(false)
+         console.error(err)
+         setSnackbar({ open: true, message: err, severity: 'error' })
+      }
    }
+
    const formik = useFormik({ initialValues, onSubmit, validationSchema })
    const { handleChange, values, touched, errors, setFieldValue } = formik
 
    return (
-      <Card className='formContainer'>
-         <Typography variant='h4' gutterBottom>
-            Koneksa Form Challenge
-         </Typography>
+      <>
          <Box
             component='form'
             autoComplete='off'
             onSubmit={formik.handleSubmit}
+            sx={{ margin: 2 }}
          >
             <Grid container spacing={2}>
                <Grid item xs={12} sm={4} lg={4}>
@@ -86,8 +110,9 @@ export const Form: React.FC = () => {
                   />
                </Grid>
             </Grid>
-            <ActionButtons />
+            <ActionButtons disableSubmit={submissionPending} />
          </Box>
-      </Card>
+         {submissionPending && <LinearProgress />}
+      </>
    )
 }
