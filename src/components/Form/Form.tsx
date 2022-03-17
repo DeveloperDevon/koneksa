@@ -112,7 +112,7 @@ export const Form: React.FC<Props> = ({ setTabIndex, setSnackbar }) => {
             </Grid>
             <ActionButtons disableSubmit={submissionPending} />
          </Box>
-         {submissionPending && <LinearProgress />}
+         {submissionPending && <LinearProgress data-test='progress-bar' />}
       </>
    )
 }

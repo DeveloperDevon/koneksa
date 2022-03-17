@@ -1,0 +1,15 @@
+{
+   "name": "Testy McTesterson",
+   "password": "password",
+   "birthday": "2020-02-02T08:00:00.000Z",
+   "preferences": {
+      "techPref": "both",
+      "timezone": "America/Bahia",
+      "pizzaToppings": {
+         "crust": "Regular",
+         "sauce": "Tomato",
+         "toppings": ["Cheese", "Ham", "Pineapple"]
+      }
+   },
+   "id": "30ad3a2a-cafe-484a-b0da-3f37ab629633"
+}

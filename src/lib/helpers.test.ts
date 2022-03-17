@@ -23,7 +23,11 @@ test('Request body is generated from state', () => {
       preferences: {
          techPref: 'both',
          timezone: 'America/Los_Angeles',
-         pizzaToppings: ['Pepperonni', 'Sausage', 'Mushrooms'],
+         pizzaToppings: {
+            crust: 'Deep Dish',
+            sauce: 'Tomato',
+            toppings: ['Pepperonni', 'Sausage', 'Mushrooms'],
+         },
       },
    })
 })

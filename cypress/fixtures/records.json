@@ -1,0 +1,24 @@
+[
+   {
+      "password": "password",
+      "preferences": {
+         "techPref": "both",
+         "timezone": "America/Los_Angeles",
+         "pizzaToppings": {
+            "toppings": [
+               "Cheese",
+               "Pepperonni",
+               "Sausage",
+               "Mushrooms",
+               "Artichokes",
+               "Ham"
+            ],
+            "crust": "Deep Dish",
+            "sauce": "Tomato"
+         }
+      },
+      "id": "c9d43a19-02b1-404b-b61b-9859a319a64d",
+      "name": "Testy McTesterson",
+      "birthday": "1988-02-16T08:00:00.000Z"
+   }
+]

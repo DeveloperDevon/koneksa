@@ -28,7 +28,7 @@ export const App = () => {
          />
          <div className='appBody'>
             <Card className='formContainer'>
-               <Typography variant='h4' gutterBottom>
+               <Typography variant='h4' gutterBottom ml={2}>
                   Koneksa Form Challenge
                </Typography>
                <CreateNewOrViewRecords

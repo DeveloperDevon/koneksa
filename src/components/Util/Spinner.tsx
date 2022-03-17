@@ -8,7 +8,7 @@ export const Spinner: React.FC = () => (
       style={{ height: 400 }}
    >
       <Grid item>
-         <CircularProgress />
+         <CircularProgress data-test='spinner' />
       </Grid>
    </Grid>
 )

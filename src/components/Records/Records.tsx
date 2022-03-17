@@ -22,7 +22,9 @@ export const Records: React.FC<Props> = ({ setSnackbar }) => {
    }, [])
 
    if (fetchingData) return <Spinner>Fetching data...</Spinner>
-   if (records.length < 1 || !records) return <h3>No Records Found...</h3>
+   if (records.length < 1 || !records)
+      return <h3 style={{ textAlign: 'center' }}>No Records Found...</h3>
+
    return (
       <Box style={{ width: '100%' }}>
          <Grid container spacing={2}>
